@@ -1,0 +1,107 @@
+<!-- (c) Arttu Jumppanen aka MindBlow -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainRape</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #200020, #5a005a);
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 80%;
+            height: 150px;
+            margin: 10px;
+            background-color: #333;
+            color: white;
+            font-size: 1.2rem;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            background-color: #550055;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #770077;
+        }
+    </style>
+</head>
+<body>
+    <h1>BrainRape Translator</h1>
+    <h3>Encode / Decode Your Messages</h3>
+    <textarea id="input" placeholder="Enter your message..."></textarea>
+    <br>
+    <button onclick="encodeMessage()">Encode</button>
+    <button onclick="decodeMessage()">Decode</button>
+    <br>
+    <textarea id="output" placeholder="Result..." readonly></textarea>
+
+    <script>
+        const alphabet = {
+    'A': '💀-.-+', 'B': '--🦴*+', 'C': '+🎭-.-', 'D': '🪓**/-', 'E': '-🧠+*/',
+    'F': '🔥--+!', 'G': '--🌑+*', 'H': '+🍷-*.', 'I': '☠️*+/-', 'J': '*🍂-+=',
+    'K': '💣+*/-', 'L': '+⚔️*-.', 'M': '💫/-+!', 'N': '+👁️-*/', 'O': '🌀-+*/',
+    'P': '+🪶-*.', 'Q': '🕸️/+*-', 'R': '-🪙*+/', 'S': '💉/-*-', 'T': '*🌹+/-',
+    'U': '🔪-+*/', 'V': '+💊-*%', 'W': '⚡-+*/', 'X': '🧨/+*-', 'Y': '☢️+*/-',
+    'Z': '💎-+*/',
+    'a': '🐍*-+!', 'b': '-🐝+*/', 'c': '🦋-+*-', 'd': '*🐉+/=', 'e': '🔮*+/!',
+    'f': '🌕-*/+', 'g': '+🦑-*%', 'h': '💥/+*-', 'i': '👾*-+/', 'j': '🦊/+*-',
+    'k': '🐺-+*/', 'l': '🧿*-+/', 'm': '🐉/-+*', 'n': '🐙*-+/=', 'o': '🪲*+/-',
+    'p': '🐺-*/+', 'q': '🦄*+/-', 'r': '🦈-+*/', 's': '🦚*-+/', 't': '🐯-*/+',
+    'u': '🐬*+/-', 'v': '🐲-+*/', 'w': '🦕*-+/', 'x': '🦅-*/+', 'y': '🦦*+/-',
+    'z': '🦓-+*/',
+    'ä': '🌺-+*=', 'ö': '🌙*/+-', 'å': '🪐+*=-',
+    '1': '🔢+*-', '2': '🎲-*+', '3': '🏆+/-', '4': '🎯-*/', '5': '🪙*+-',
+    '6': '🎱+*-', '7': '🗡️-+*', '8': '⚔️*/-', '9': '💰-+*', '10': '🏅*/-+',
+    '20': '🔗+*-', '30': '🕰️-+*', '40': '🔑*/-', '50': '🧩-+*', '60': '🎭*/-+',
+    '70': '💣+*-', '80': '🪓-+*', '90': '🪞*/-+', '100': '🪅-+*/'
+};
+
+        function encodeMessage() {
+            const input = document.getElementById("input").value.toUpperCase();
+            let result = '';
+            for (let char of input) {
+                result += alphabet[char] || char;
+            }
+            document.getElementById("output").value = result;
+        }
+
+        function decodeMessage() {
+            const input = document.getElementById("input").value;
+            let result = '';
+            let i = 0;
+            while (i < input.length) {
+                let found = false;
+                for (const [key, value] of Object.entries(alphabet)) {
+                    if (input.startsWith(value, i)) {
+                        result += key;
+                        i += value.length;
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    result += '?';
+                    i++;
+                }
+            }
+            document.getElementById("output").value = result;
+        }
+    </script>
+</body>
+</html>
